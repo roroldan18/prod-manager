@@ -1,5 +1,5 @@
-import React from 'react'
-import { BtnSection, Button, Footer, NavSect, Section, SubTitle } from '../StylesMain'
+import React from 'react';
+import { BtnSection, Button, NavSect, Section, SubTitle } from '../StylesMain'
 import { products } from '../../database';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ const ProductList = () => {
           <SubTitle>ProductList</SubTitle>
           <BtnSection>
             <Button><Link to="/addproduct">ADD</Link></Button>
-            <Button>MASS DELETE</Button>
+            <Button id='delete-product-btn'>MASS DELETE</Button>
           </BtnSection>
         </NavSect>
       </Section>
@@ -23,9 +23,6 @@ const ProductList = () => {
           ))
         }
       </Section>
-      <Footer>
-        Scandiweb Test Assignment
-      </Footer>
     </>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import ProductAdd from './components/ProductAdd';
 import ProductList from './components/ProductList';
-import { Container, Title } from './StylesMain';
+import { Container, Footer, Title } from './StylesMain';
 
 const App = () => {
   return (
@@ -14,6 +14,9 @@ const App = () => {
           <Route path="addproduct" element={<ProductAdd />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        <Footer>
+          Scandiweb Test Assignment
+        </Footer>
       </Container>
     </>
   )
