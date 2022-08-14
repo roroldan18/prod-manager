@@ -60,5 +60,8 @@ module.exports = {
             new CssMinimizerPlugin(),
             new TerserPlugin(),
         ]
-    }
+    },
+    devServer: {
+        historyApiFallback: true, // Agregada para que el servidor funcione con react-router
+    },
 }
