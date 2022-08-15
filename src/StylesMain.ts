@@ -10,12 +10,19 @@ export const Title = styled.h1`
   text-align: center;
   font-size: 1.5em;
   color: ${mainColor};
-`;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.2em;
+  }
+
+  `;
 
 export const SubTitle = styled.h3`
   text-align: center;
   font-size: 1.5em;
   color: ${secondaryColor};
+  @media only screen and (max-width: 600px) {
+    font-size: 1.1em;
+  }
 `;
 
 export const BtnSection = styled.div`
@@ -37,7 +44,7 @@ export const Button = styled.button`
   letter-spacing: 0.2em;
 
   @media only screen and (max-width: 600px) {
-    font-size: 0.3em;
+    font-size: 0.8em;
     letter-spacing: 0;
   }
   
