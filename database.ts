@@ -7,9 +7,13 @@ export const products: IProduct[] = [
     price: 100,
     type: {
       name: 'DVD-disc',
-      nameAttribute: 'size',
-      measureUnit: 'MB',
-      value: 100
+      attribute: [
+        {
+          name:'size',
+          measureUnit: 'MB',
+          value: 100
+        }
+      ]
     }
   },
   {
@@ -18,9 +22,13 @@ export const products: IProduct[] = [
     price: 200,
     type: {
       name: 'Book',
-      nameAttribute: 'weight',
-      measureUnit: 'Kg',
-      value: 200
+      attribute: [
+        {
+          name:'weight',
+          measureUnit: 'Kg',
+          value: 200
+        }
+      ]
     }
   },
   {
@@ -29,9 +37,23 @@ export const products: IProduct[] = [
     price: 300,
     type: {
       name: 'Furniture',
-      nameAttribute: 'Dimensions',
-      measureUnit: 'cm',
-      value: '30x30x30'
+      attribute: [
+        {
+          name:'width',
+          measureUnit: 'cm',
+          value: 30
+        },
+        {
+          name:'height',
+          measureUnit: 'cm',
+          value: 30
+        },
+        {
+          name:'length',
+          measureUnit: 'cm',
+          value: 30
+        },
+      ]
     }
   },
   {
@@ -40,9 +62,23 @@ export const products: IProduct[] = [
     price: 400,
     type: {
       name: 'Furniture',
-      nameAttribute: 'Dimensions',
-      measureUnit: 'cm',
-      value: '40x40x40'
+      attribute: [
+        {
+          name:'width',
+          measureUnit: 'cm',
+          value: 40
+        },
+        {
+          name:'height',
+          measureUnit: 'cm',
+          value: 40
+        },
+        {
+          name:'length',
+          measureUnit: 'cm',
+          value: 40
+        },
+      ]
     }
   },
   {
@@ -51,9 +87,13 @@ export const products: IProduct[] = [
     price: 500,
     type: {
       name: 'Book',
-      nameAttribute: 'weight',
-      measureUnit: 'Kg',
-      value: 500
+      attribute: [
+        {
+          name: 'weight',
+          measureUnit: 'Kg',
+          value: 500
+        }
+      ]
     }
   },
   {
@@ -62,9 +102,13 @@ export const products: IProduct[] = [
     price: 600,
     type: {
       name: 'DVD-disc',
-      nameAttribute: 'size',
-      measureUnit: 'MB',
-      value: 600
+      attribute: [
+        {
+          name: 'size',
+          measureUnit: 'MB',
+          value: 600
+        }
+      ]
     }
   },
   {
@@ -73,9 +117,13 @@ export const products: IProduct[] = [
     price: 700,
     type: {
       name: 'Book',
-      nameAttribute: 'weight',
-      measureUnit: 'Kg',
-      value: 700
+      attribute: [
+        {
+          name: 'weight',
+          measureUnit: 'Kg',
+          value: 700
+        }
+      ]
     }
   },
   {
@@ -84,9 +132,23 @@ export const products: IProduct[] = [
     price: 800,
     type: {
       name: 'Furniture',
-      nameAttribute: 'Dimensions',
-      measureUnit: 'cm',
-      value: '50x50x50'
+      attribute: [
+        {
+          name:'width',
+          measureUnit: 'cm',
+          value: 50
+        },
+        {
+          name:'height',
+          measureUnit: 'cm',
+          value: 50
+        },
+        {
+          name:'length',
+          measureUnit: 'cm',
+          value: 50
+        },
+      ]
     }
   }
 ]

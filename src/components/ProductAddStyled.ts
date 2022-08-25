@@ -42,6 +42,10 @@ export const Info = styled.p`
   }
 `;
 
+export const FormSect = styled.form`
+  width: 100%;
+`
+
 export const ErrorForm = styled(ErrorMessage)`
   display: flex;
   color: red;

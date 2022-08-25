@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { BtnSection, Button, NavSect, SectForm, Section, SubTitle } from '../StylesMain';
-import { ContInput, Label, ErrorForm } from './ProductAddStyled';
+import { ContInput, Label, ErrorForm, FormSect } from './ProductAddStyled';
 import { typeProd } from '../interfaces/interfaces';
 import { Field, Formik } from 'formik';
 import BookInput from './BookInput';
@@ -108,7 +108,7 @@ const ProductAdd = () => {
   }
 
 
-  const handleSubmit = (values:any) => {
+  const handleSubmitAdd = (values:any) => {
     console.log(values);
     //Create a new Form to send to database
   }
@@ -121,7 +121,7 @@ const ProductAdd = () => {
       initialValues={initialValues}
       validationSchema={formSchema}
       onSubmit={(values, { setSubmitting }) => {
-        handleSubmit(values)
+        handleSubmitAdd(values)
         setSubmitting(false);
       }}
       >
@@ -132,7 +132,7 @@ const ProductAdd = () => {
         handleSubmit,
         isSubmitting,
       }) => (
-        <form onSubmit={handleSubmit}>
+        <FormSect onSubmit={handleSubmit}>
             <Section>
               <NavSect>
                 <SubTitle>ProductAdd</SubTitle>
@@ -210,7 +210,7 @@ const ProductAdd = () => {
                 }
                 
             </SectForm>
-          </form>
+          </FormSect>
       )}
       </Formik>
   )
