@@ -78,6 +78,20 @@ export const Section = styled.div`
   }
 `;
 
+export const SectForm = styled.div`
+border-bottom: 2px solid black;
+display: flex;
+flex-direction: column;
+flex-wrap: wrap;
+width: 100%;
+@media only screen and (max-width: 600px) {
+  justify-content: center;
+  input{
+    width: 100%;
+  }
+}
+`;
+
 export const Footer = styled.footer`
 width: 100%;
 font-size: 0.7em;

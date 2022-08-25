@@ -2,16 +2,68 @@ export interface IProduct {
   SKU: string;
   name: string;
   price: number;
-  type: DVDDisc | Book | Furniture;
+  type: SchemaOptions
 }
 
-export interface IType<T, A, U, V>{
+export type typeProd = 'DVD-disc' | 'Book' | 'Furniture';
+
+interface SchemaOptionsGeneric<T extends typeProd>{
   name: T;
-  nameAttribute: A;
-  measureUnit: U;
-  value: V;
+}
+interface SchemaOptionsBook extends SchemaOptionsGeneric<'Book'>{
+  attribute: attBook[];
+}
+interface SchemaOptionsFurniture extends SchemaOptionsGeneric<'Furniture'>{
+  attribute: [
+    attFurniture<'width'>,
+    attFurniture<'height'>,
+    attFurniture<'length'>
+  ]
+}
+interface SchemaOptionsDVD extends SchemaOptionsGeneric<'DVD-disc'>{
+  attribute: attDVD[];
 }
 
-type DVDDisc = IType<'DVD-disc', 'size', 'MB', number> ;
-type Book = IType<'Book', 'weight', 'Kg', number>;
-type Furniture = IType<'Furniture', 'Dimensions', 'cm', `${number}x${number}x${number}`>;
+type SchemaOptions = SchemaOptionsBook | SchemaOptionsFurniture | SchemaOptionsDVD;
+
+interface attrProduct {
+  name: string;
+  measureUnit: string;
+  value: number;
+}
+interface attBook extends attrProduct {
+  name: 'weight',
+  measureUnit: 'Kg',
+}
+
+interface attDVD extends attrProduct{
+  name: 'size',
+  measureUnit: 'MB',
+}
+
+type nameFurnitureAtt = 'width' | 'height' | 'length';
+interface attFurniture<T extends nameFurnitureAtt> extends attrProduct {
+  name: T,
+  measureUnit: 'cm',
+}
+
+
+
+const product: IProduct = {
+  SKU: '123',
+  name: 'Product 1',
+  price: 12.99,
+  type: {
+    name: 'Book',
+    attribute: [{
+      name: 'weight',
+      measureUnit: 'Kg',
+      value: 1.5
+    }]
+  }
+}
+
+
+
+
+

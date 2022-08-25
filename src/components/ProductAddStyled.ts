@@ -1,3 +1,4 @@
+import { ErrorMessage } from "formik";
 import styled from "styled-components";
 
 export const Form = styled.form`
@@ -40,3 +41,15 @@ export const Info = styled.p`
     content: "*";
   }
 `;
+
+export const ErrorForm = styled(ErrorMessage)`
+  display: flex;
+  color: red;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  align-items: center;
+  font-size: 0.7em;
+  :before{
+    content: "* ";
+  }
+`
