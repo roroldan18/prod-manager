@@ -47,23 +47,3 @@ interface attFurniture<T extends nameFurnitureAtt> extends attrProduct {
   measureUnit: 'cm',
 }
 
-
-
-const product: IProduct = {
-  SKU: '123',
-  name: 'Product 1',
-  price: 12.99,
-  type: {
-    name: 'Book',
-    attribute: [{
-      name: 'weight',
-      measureUnit: 'Kg',
-      value: 1.5
-    }]
-  }
-}
-
-
-
-
-
