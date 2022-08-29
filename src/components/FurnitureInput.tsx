@@ -8,34 +8,34 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
     <>
       <ContInputs>
         <ContInput>
-          <Label>Height (cm)</Label>
+          <Label>Length (cm)</Label>
           <Field 
             type="number" 
-            name="height"
+            name={`attributes[0].length`} 
             onChange={handleChange}
-            value={values.height}
+            value={values.attributes[0].length}
             />
-            <ErrorForm name="height" component="div" />
+            <ErrorForm name={`attributes[0].length`} component="div" />
         </ContInput>
         <ContInput>
           <Label>Width (cm)</Label>
           <Field 
             type="number" 
-            name="width"
+            name={`attributes[0].width`}
             onChange={handleChange}
-            value={values.width}
+            value={values.attributes[0].width}
             />
-            <ErrorForm name="width" component="div" />
+            <ErrorForm name={`attributes[0].width`} component="div" />
         </ContInput>
         <ContInput>
-          <Label>Length (cm)</Label>
+          <Label>Height (cm)</Label>
           <Field 
             type="number" 
-            name="length"
+            name={`attributes[0].height`}
             onChange={handleChange}
-            value={values.length}
+            value={values.attributes[0].height}
             />  
-            <ErrorForm name="length" component="div" />        
+            <ErrorForm name={`attributes[0].height`} component="div" />        
         </ContInput>
       </ContInputs>
       <Info>Please provide dimensions in HxWxL format of the furniture.</Info>

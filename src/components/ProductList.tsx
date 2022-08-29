@@ -1,32 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BtnSection, Button, NavSect, Section, SubTitle } from '../StylesMain'
-import { products } from '../../database';
 import ProductCard from './ProductCard';
 import { Link } from 'react-router-dom';
 import { FormSect } from './ProductAddStyled';
 import { Formik } from 'formik';
+import { deleteMassProducts, getProducts } from '../services/products';
+import { IProduct } from '../interfaces/interfaces';
 
 
 const ProductList = () => {
-
-  const handleSubmitDelete = (values:any) => {
-    console.log('submit');    
-    const objToDelete = []; 
-    objToDelete.push(...Object.keys(values).filter(key => values[key] === true ));
-
-
-    if(objToDelete.length ===0){
+  
+  const [ products, setProducts ] = useState<IProduct[]>([]) 
+  
+  
+  
+  
+  //VER PROBLEMA DE RENDERIZADO
+  
+  const handleSubmitDelete =  async(values:any) => {
+    const arrToDelete = []; 
+    arrToDelete.push(...Object.keys(values).filter(key => values[key] === true ));
+    
+    if(arrToDelete.length ===0){
       alert('Nothing to delete')
     } else {
-      console.log('ACCION PARA BORRAR')
-      console.log(objToDelete);
+      try{
+        const res:any = await deleteMassProducts(arrToDelete);
+        res.message === 'deleted' && handleGetProducts(true);
+      } catch (error){
+        alert('An error occur')
+      } 
     }
   }
+  
+  const handleGetProducts = async (isMounted:boolean) => {
+    try{
+      if(isMounted){
+        const res  = await getProducts();
+        setProducts(res.data)
+      }
+    }catch (error) {
+      console.log('Hubo un error al obtener los productos');
+    }
+  }
+  
+  useEffect(() => {
+    let isMounted = true;
+    handleGetProducts(isMounted);
+    return ()=>{isMounted=false}
+  }, [])
 
 
-  const initialValues = {
-    
-  };
+  
+  const initialValues = {};
 
   return (
     <Formik
@@ -54,6 +80,8 @@ const ProductList = () => {
           </Section>
           <Section>
             {
+              products.length > 0
+              &&
               products.map(product => (
                 <ProductCard key={product.SKU} product={product} handleChange={handleChange} values={values} />
               ))

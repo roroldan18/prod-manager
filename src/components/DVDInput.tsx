@@ -12,11 +12,11 @@ const DVDInput = ({values, handleChange}: PropsAtt) => {
         
         <Field 
           type="number" 
-          name="size"
+          name={`attributes[0].size`} 
           onChange={handleChange}
-          value={values.size}
+          value={values.attributes[0].size}
           />
-        <ErrorForm name="size" component="div" />
+        <ErrorForm name={`attributes[0].size`}  component="div" />
       </ContInput>
       <Info>Please provide size in Mb of the DVD.</Info>
     </>

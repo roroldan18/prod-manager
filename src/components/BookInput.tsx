@@ -15,11 +15,11 @@ const BookInput = ({values, handleChange}: PropsAtt) => {
         <Label>Weight (KG)</Label>
         <Field 
           type="number" 
-          name="weight" 
+          name={`attributes[0].weight`} 
           onChange={handleChange}
-          value={values.weight}
+          value={values.attributes[0].weight}
           />
-        <ErrorForm name="weight" component="div" />
+        <ErrorForm name={`attributes[0].weight`} component="div" />
       </ContInput>
       <Info>Please provide the weight in Kg of the book.</Info>
     </>

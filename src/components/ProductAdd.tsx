@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BtnSection, Button, NavSect, SectForm, Section, SubTitle } from '../StylesMain';
 import { ContInput, Label, ErrorForm, FormSect } from './ProductAddStyled';
 import { typeProd } from '../interfaces/interfaces';
-import { Field, Formik } from 'formik';
+import { Field, FieldArray, Formik, yupToFormErrors } from 'formik';
 import BookInput from './BookInput';
 import DVDInput from './DVDInput';
 import FurnitureInput from './FurnitureInput';
@@ -20,16 +20,19 @@ export interface formFormik {
   name: string,
   price: number,
   type: string,
-  weight?: number,
-  width?: number,
-  height?:number,
-  size?:number,
-  length?:number
+  attributes: [
+    {
+    weight?: number,
+    width?: number,
+    height?:number,
+    size?:number,
+    length?:number
+  }
+  ]
 }
 
 
 const ProductAdd = () => {
-
   const formSchema = Yup.object().shape({
     SKU: Yup.string()
       .min(5, 'Too Short!')
@@ -39,51 +42,48 @@ const ProductAdd = () => {
       .min(2, 'Too Short!')
       .max(50, 'Too Long!')
       .required('Required'),
-      price: Yup.number()
+    price: Yup.number()
       .min(1, 'Insert a price')
       .required('Required'),
-      type: Yup.string()
+    type: Yup.string()
       .required('Required'),
-      weight: Yup
-      .number() 
+    attributes: Yup.array()
       .when("type", {
-        is: 'Book',
-        then: Yup.number()
-          .required("Must add a weight")
-          .min(1, 'Insert a weight')
-      }),
-      size: Yup
-      .number() 
+        is: "Book",
+        then: Yup.array().of(
+          Yup.object().shape({  
+            weight: Yup.number() 
+            .required("Must add a weight")
+            .min(1, 'Insert a weight')
+          })
+        )
+      })
       .when("type", {
-        is: 'DVD-disc',
-        then: Yup.number()
-          .required("Must add a size")
-          .min(1, 'Insert a size')
-      }),
-      length: Yup
-      .number() 
+        is: "DVD-disc",
+        then: Yup.array().of(
+          Yup.object().shape({  
+            size: Yup.number()
+              .required("Must add a size")
+              .min(1, 'Insert a size')
+            })
+        )
+      })
       .when("type", {
-        is: 'Furniture',
-        then: Yup.number()
-          .required("Must add a length")
-          .min(1, 'Insert a length')
-      }),
-      width: Yup
-      .number() 
-      .when("type", {
-        is: 'Furniture',
-        then: Yup.number()
-          .required("Must add a width")
-          .min(1, 'Insert a width')
-      }),
-      height: Yup
-      .number() 
-      .when("type", {
-        is: 'Furniture',
-        then: Yup.number()
-          .required("Must add a height")
-          .min(1, 'Insert a height')
-      }),
+        is: "Furniture",
+        then: Yup.array().of(
+          Yup.object().shape({  
+            length: Yup.number() 
+                .required("Must add a length")
+                .min(15, 'Insert a length'),
+            width: Yup.number() 
+                  .required("Must add a width")
+                  .min(15, 'Insert a width'),
+            height: Yup.number() 
+                  .required("Must add a height")
+                  .min(15, 'Insert a height')
+            })
+        )
+      })
   });
 
   const initialValues:formFormik = {
@@ -91,11 +91,9 @@ const ProductAdd = () => {
     name: '',
     price: 0,
     type: '',
-    weight: 0,
-    width: 0,
-    height:0,
-    size:0,
-    length:0
+    attributes: [
+      {}
+    ]
   }
 
   const typesProduct:typeProd[] = ['Book', 'DVD-disc', 'Furniture'];
@@ -195,19 +193,23 @@ const ProductAdd = () => {
                 <ErrorForm name="type" component="div" />
               </ContInput>
               
-              {
-                  selectedType==='Book'
-                  ?
-                  <BookInput handleChange={handleChange} values={values} />
-                  :
-                  selectedType==='DVD-disc'
-                  ?
-                  <DVDInput handleChange={handleChange} values={values}/>
-                  :
-                  selectedType==='Furniture'
-                  &&
-                  <FurnitureInput handleChange={handleChange} values={values} />
-                }
+              <FieldArray
+                name='attributes'
+                render={arrayHelpers => (
+                  
+                      selectedType === 'Book'
+                      ?
+                      <BookInput handleChange={handleChange} values={values}  />
+                      :
+                      selectedType==='DVD-disc'
+                      ?
+                      <DVDInput handleChange={handleChange} values={values} />
+                      :
+                      selectedType==='Furniture'
+                      &&
+                      <FurnitureInput handleChange={handleChange} values={values}  />
+                )}
+              />
                 
             </SectForm>
           </FormSect>
