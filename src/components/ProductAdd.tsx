@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BtnSection, Button, NavSect, SectForm, Section, SubTitle } from '../StylesMain';
 import { ContInput, Label, ErrorForm, FormSect } from './ProductAddStyled';
 import { typeProd } from '../interfaces/interfaces';
-import { Field, FieldArray, Formik, yupToFormErrors } from 'formik';
+import { Field, FieldArray, Formik, replace } from 'formik';
 import BookInput from './BookInput';
 import DVDInput from './DVDInput';
 import FurnitureInput from './FurnitureInput';
 import * as Yup from 'yup';
+import { addProduct } from '../services/products';
 
 
 export type handleChangeInt = {
@@ -24,19 +25,24 @@ export interface formFormik {
     {
     weight?: number,
     width?: number,
-    height?:number,
-    size?:number,
-    length?:number
+    height?: number,
+    size?: number,
+    length?: number
   }
   ]
 }
 
 
+
+
 const ProductAdd = () => {
+
+  const navigate = useNavigate();
+
   const formSchema = Yup.object().shape({
     SKU: Yup.string()
       .min(5, 'Too Short!')
-      .max(15, 'Too Long!')
+      .max(10, 'Too Long!')
       .required('Required'),
     name: Yup.string()
       .min(2, 'Too Short!')
@@ -92,7 +98,8 @@ const ProductAdd = () => {
     price: 0,
     type: '',
     attributes: [
-      {}
+      {
+      }
     ]
   }
 
@@ -100,15 +107,22 @@ const ProductAdd = () => {
 
   const [selectedType, setSelectedType] = useState<typeProd>('' as typeProd);
 
-  const handleChangeSelect =(e:React.ChangeEvent<HTMLSelectElement>, handleChange:handleChangeInt) => {
+  const handleChangeSelect =(e:React.ChangeEvent<HTMLSelectElement>, handleChange:handleChangeInt, setFieldValue:(field: string, value: any, shouldValidate?: boolean | undefined)=> void ) => {
     handleChange(e);
-    setSelectedType(e.target.value as typeProd)
+    setSelectedType(e.target.value as typeProd);
+    //On Change Select, reset the attributes array.
+    setFieldValue("attributes", initialValues.attributes);
   }
 
 
-  const handleSubmitAdd = (values:any) => {
-    console.log(values);
-    //Create a new Form to send to database
+  const handleSubmitAdd = async (values:any) => {
+    addProduct(values)
+      .then(res => {
+        navigate("/", {replace:true})
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
   
@@ -118,14 +132,16 @@ const ProductAdd = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={formSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        handleSubmitAdd(values)
+      onSubmit={(values, { setSubmitting, resetForm } ) => {
+        handleSubmitAdd(values);
         setSubmitting(false);
+        resetForm();
       }}
       >
       {({
         values,
         handleChange,
+        setFieldValue,
         handleBlur,
         handleSubmit,
         isSubmitting,
@@ -136,7 +152,7 @@ const ProductAdd = () => {
                 <SubTitle>ProductAdd</SubTitle>
                 <BtnSection>
                   <Button type="submit" disabled={isSubmitting}>Save</Button>
-                  <Button><Link to="/">Cancel</Link></Button>
+                  <Link to="/"><Button>Cancel</Button></Link>
                 </BtnSection>
               </NavSect>
             </Section>
@@ -180,7 +196,7 @@ const ProductAdd = () => {
                   as="select" 
                   id="productType" 
                   name="type" 
-                  onChange={ (e:React.ChangeEvent<HTMLSelectElement>) => handleChangeSelect(e, handleChange) } 
+                  onChange={ (e:React.ChangeEvent<HTMLSelectElement>) => handleChangeSelect(e, handleChange, setFieldValue) } 
                   value={values.type}
                 >
                     <option value="" disabled >Select a type</option>
@@ -196,7 +212,6 @@ const ProductAdd = () => {
               <FieldArray
                 name='attributes'
                 render={arrayHelpers => (
-                  
                       selectedType === 'Book'
                       ?
                       <BookInput handleChange={handleChange} values={values}  />

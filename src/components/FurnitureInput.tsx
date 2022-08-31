@@ -13,7 +13,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
             type="number" 
             name={`attributes[0].length`} 
             onChange={handleChange}
-            value={values.attributes[0].length}
+            value={values.attributes[0].length || ''}
             />
             <ErrorForm name={`attributes[0].length`} component="div" />
         </ContInput>
@@ -23,7 +23,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
             type="number" 
             name={`attributes[0].width`}
             onChange={handleChange}
-            value={values.attributes[0].width}
+            value={values.attributes[0].width || ''}
             />
             <ErrorForm name={`attributes[0].width`} component="div" />
         </ContInput>
@@ -33,7 +33,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
             type="number" 
             name={`attributes[0].height`}
             onChange={handleChange}
-            value={values.attributes[0].height}
+            value={values.attributes[0].height || ''}
             />  
             <ErrorForm name={`attributes[0].height`} component="div" />        
         </ContInput>

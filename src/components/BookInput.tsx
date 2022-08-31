@@ -17,7 +17,7 @@ const BookInput = ({values, handleChange}: PropsAtt) => {
           type="number" 
           name={`attributes[0].weight`} 
           onChange={handleChange}
-          value={values.attributes[0].weight}
+          value={values.attributes[0].weight || ''}
           />
         <ErrorForm name={`attributes[0].weight`} component="div" />
       </ContInput>

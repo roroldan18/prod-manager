@@ -14,7 +14,7 @@ const DVDInput = ({values, handleChange}: PropsAtt) => {
           type="number" 
           name={`attributes[0].size`} 
           onChange={handleChange}
-          value={values.attributes[0].size}
+          value={values.attributes[0].size || ''}
           />
         <ErrorForm name={`attributes[0].size`}  component="div" />
       </ContInput>

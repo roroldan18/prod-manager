@@ -11,7 +11,13 @@ import { IProduct } from '../interfaces/interfaces';
 const ProductList = () => {
   
   const [ products, setProducts ] = useState<IProduct[]>([]) 
-  
+
+  useEffect(() => {
+    let isMounted = true;
+    handleGetProducts(isMounted);
+    return ()=>{isMounted=false}
+  }, [])
+
   
   
   
@@ -26,7 +32,7 @@ const ProductList = () => {
     } else {
       try{
         const res:any = await deleteMassProducts(arrToDelete);
-        res.message === 'deleted' && handleGetProducts(true);
+        res.message === 'deleted' && window.location.reload();
       } catch (error){
         alert('An error occur')
       } 
@@ -44,12 +50,7 @@ const ProductList = () => {
     }
   }
   
-  useEffect(() => {
-    let isMounted = true;
-    handleGetProducts(isMounted);
-    return ()=>{isMounted=false}
-  }, [])
-
+ 
 
   
   const initialValues = {};
@@ -73,7 +74,7 @@ const ProductList = () => {
             <NavSect>
               <SubTitle>ProductList</SubTitle>
               <BtnSection>
-                <Button><Link to="/addproduct">ADD</Link></Button>
+                <Link to="/addproduct"><Button>ADD</Button></Link>
                 <Button id='delete-product-btn' type="submit" disabled={isSubmitting}>MASS DELETE</Button>
               </BtnSection>
             </NavSect>
