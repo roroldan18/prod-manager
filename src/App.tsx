@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import ProductAdd from './components/ProductAdd';
-import ProductList from './components/ProductList';
+import ProductAdd from './pages/ProductAdd';
+import ProductList from './pages/ProductList';
 import { Container, Footer, Title } from './StylesMain';
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         <Footer>
-          Scandiweb Test Assignment
+          Assignment Product App
         </Footer>
       </Container>
     </>

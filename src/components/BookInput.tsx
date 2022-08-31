@@ -1,7 +1,7 @@
 import { Field} from 'formik'
 import React from 'react'
 import { ContInput, Info, Label, ErrorForm } from './ProductAddStyled';
-import { formFormik, handleChangeInt } from './ProductAdd';
+import { formFormik, handleChangeInt } from '../pages/ProductAdd';
 
 export interface PropsAtt {
   handleChange: handleChangeInt,

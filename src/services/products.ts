@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { formFormik } from '../components/ProductAdd';
+import { formFormik } from '../pages/ProductAdd';
 import { attributeJSON } from '../../server/src/routes/productsRouter';
 
 const url = 'http://localhost:3000/products'

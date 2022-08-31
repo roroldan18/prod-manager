@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BtnSection, Button, NavSect, Section, SubTitle } from '../StylesMain'
-import ProductCard from './ProductCard';
+import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
-import { FormSect } from './ProductAddStyled';
+import { FormSect } from '../components/ProductAddStyled';
 import { Formik } from 'formik';
 import { deleteMassProducts, getProducts } from '../services/products';
 import { IProduct } from '../interfaces/interfaces';

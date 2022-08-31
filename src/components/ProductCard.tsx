@@ -1,7 +1,7 @@
 import React from 'react'
 import { firstUp } from '../helpers/firstLetterUpper'
 import { AttrProduct, IProduct } from '../interfaces/interfaces'
-import { handleChangeInt } from './ProductAdd'
+import { handleChangeInt } from '../pages/ProductAdd'
 import { CardContainer, CardContent } from './ProductCardStyled'
 
 type Props = {

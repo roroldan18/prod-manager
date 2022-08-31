@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { BtnSection, Button, NavSect, SectForm, Section, SubTitle } from '../StylesMain';
-import { ContInput, Label, ErrorForm, FormSect } from './ProductAddStyled';
+import { ContInput, Label, ErrorForm, FormSect } from '../components/ProductAddStyled';
 import { typeProd } from '../interfaces/interfaces';
 import { Field, FieldArray, Formik, replace } from 'formik';
-import BookInput from './BookInput';
-import DVDInput from './DVDInput';
-import FurnitureInput from './FurnitureInput';
+import BookInput from '../components/BookInput';
+import DVDInput from '../components/DVDInput';
+import FurnitureInput from '../components/FurnitureInput';
 import * as Yup from 'yup';
 import { addProduct } from '../services/products';
 
