@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { BtnSection, Button, NavSect, SectForm, Section, SubTitle } from '../StylesMain';
-import { ContInput, Label, ErrorForm, FormSect } from '../components/ProductAddStyled';
+import { ContInput, Label, ErrorForm, FormSect } from './ProductAddStyled';
 import { typeProd } from '../interfaces/interfaces';
-import { Field, FieldArray, Formik, replace } from 'formik';
+import { Field, FieldArray, Formik } from 'formik';
 import BookInput from '../components/BookInput';
 import DVDInput from '../components/DVDInput';
 import FurnitureInput from '../components/FurnitureInput';
-import * as Yup from 'yup';
 import { addProduct } from '../services/products';
+import { formSchema } from '../schemas/formModelValidation.schema';
 
 
 export type handleChangeInt = {
@@ -39,72 +39,15 @@ const ProductAdd = () => {
 
   const navigate = useNavigate();
 
-  const formSchema = Yup.object().shape({
-    SKU: Yup.string()
-      .min(5, 'Too Short!')
-      .max(10, 'Too Long!')
-      .required('Required'),
-    name: Yup.string()
-      .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
-      .required('Required'),
-    price: Yup.number()
-      .min(1, 'Insert a price')
-      .required('Required'),
-    type: Yup.string()
-      .required('Required'),
-    attributes: Yup.array()
-      .when("type", {
-        is: "Book",
-        then: Yup.array().of(
-          Yup.object().shape({  
-            weight: Yup.number() 
-            .required("Must add a weight")
-            .min(1, 'Insert a weight')
-          })
-        )
-      })
-      .when("type", {
-        is: "DVD-disc",
-        then: Yup.array().of(
-          Yup.object().shape({  
-            size: Yup.number()
-              .required("Must add a size")
-              .min(1, 'Insert a size')
-            })
-        )
-      })
-      .when("type", {
-        is: "Furniture",
-        then: Yup.array().of(
-          Yup.object().shape({  
-            length: Yup.number() 
-                .required("Must add a length")
-                .min(15, 'Insert a length'),
-            width: Yup.number() 
-                  .required("Must add a width")
-                  .min(15, 'Insert a width'),
-            height: Yup.number() 
-                  .required("Must add a height")
-                  .min(15, 'Insert a height')
-            })
-        )
-      })
-  });
-
   const initialValues:formFormik = {
     SKU: '',
     name: '',
     price: 0,
     type: '',
-    attributes: [
-      {
-      }
-    ]
+    attributes: [{}]
   }
 
   const typesProduct:typeProd[] = ['Book', 'DVD-disc', 'Furniture'];
-
   const [selectedType, setSelectedType] = useState<typeProd>('' as typeProd);
 
   const handleChangeSelect =(e:React.ChangeEvent<HTMLSelectElement>, handleChange:handleChangeInt, setFieldValue:(field: string, value: any, shouldValidate?: boolean | undefined)=> void ) => {
@@ -113,7 +56,6 @@ const ProductAdd = () => {
     //On Change Select, reset the attributes array.
     setFieldValue("attributes", initialValues.attributes);
   }
-
 
   const handleSubmitAdd = async (values:any) => {
     addProduct(values)
@@ -126,17 +68,15 @@ const ProductAdd = () => {
   }
 
   
-
-  
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={formSchema}
       onSubmit={(values, { setSubmitting, resetForm } ) => {
         handleSubmitAdd(values);
         setSubmitting(false);
         resetForm();
       }}
+      validationSchema={formSchema}
       >
       {({
         values,

@@ -1,7 +1,7 @@
 import { Field } from 'formik'
 import React from 'react'
 import { PropsAtt } from './BookInput'
-import { ContInput, ErrorForm, Info, Label } from './ProductAddStyled'
+import { ContInput, ErrorForm, Info, Label } from '../pages/ProductAddStyled'
 
 
 const DVDInput = ({values, handleChange}: PropsAtt) => {

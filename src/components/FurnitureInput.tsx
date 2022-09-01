@@ -1,7 +1,7 @@
 import React from 'react'
 import { Field } from 'formik'
 import { PropsAtt } from './BookInput'
-import { ContInput, ContInputs, ErrorForm, Info, Label } from './ProductAddStyled'
+import { ContInput, ContInputs, ErrorForm, Info, Label } from '../pages/ProductAddStyled'
 
 const FurnitureInput = ({values, handleChange}: PropsAtt) => {
   return (

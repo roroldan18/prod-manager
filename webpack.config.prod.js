@@ -4,17 +4,20 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
     entry: './src/index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'main.js',
-        publicPath: '/',
+        filename: 'main.js'
     },
     mode:'production',
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    },
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
     },
@@ -30,7 +33,7 @@ module.exports = {
             },
             {
                 test: /\.(png|ico)/,
-                type: 'asset/resource'
+                type: '/public'
             },
             {
                 test: /\.html%/,
@@ -53,21 +56,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './public/index.html',
-            filename: './index.html'
+            filename: './index.html',
+            favicon: "./public/favicon.ico"
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css'
         }),
         new CleanWebpackPlugin(),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, 'src', 'assets/images'),
-                    to: 'assets/images'
-                }
-            ]
-        }),
-
     ],
     optimization:{
         minimize: true,
@@ -75,5 +70,8 @@ module.exports = {
             new CssMinimizerPlugin(),
             new TerserPlugin(),
         ]
-    }
+    },
+    devServer: {
+        historyApiFallback: true,
+    },
 }
