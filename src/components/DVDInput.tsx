@@ -11,6 +11,7 @@ const DVDInput = ({values, handleChange}: PropsAtt) => {
         <Label>Size (MB)</Label>
         
         <Field 
+          id="size"
           type="number" 
           name={`attributes[0].size`} 
           onChange={handleChange}

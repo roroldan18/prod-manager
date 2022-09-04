@@ -10,6 +10,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
         <ContInput>
           <Label>Length (cm)</Label>
           <Field 
+            id="length"
             type="number" 
             name={`attributes[0].length`} 
             onChange={handleChange}
@@ -20,6 +21,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
         <ContInput>
           <Label>Width (cm)</Label>
           <Field 
+            id="width"
             type="number" 
             name={`attributes[0].width`}
             onChange={handleChange}
@@ -30,6 +32,7 @@ const FurnitureInput = ({values, handleChange}: PropsAtt) => {
         <ContInput>
           <Label>Height (cm)</Label>
           <Field 
+            id="height"
             type="number" 
             name={`attributes[0].height`}
             onChange={handleChange}

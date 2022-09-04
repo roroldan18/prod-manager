@@ -36,6 +36,10 @@ interface ObjToPost {
 //Add Product
 export const addProduct = async (values:formFormik) => {
 
+  if(values.type === "DVD"){
+    values.type = "DVD-disc";
+  }
+
   //1. convert attribute names in object with ID 
   const getIdAttObj = await axios.post(url+'/attributes/', {
     attributes: values.attributes

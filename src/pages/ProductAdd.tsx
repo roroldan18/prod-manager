@@ -33,8 +33,6 @@ export interface formFormik {
 }
 
 
-
-
 const ProductAdd = () => {
 
   const navigate = useNavigate();
@@ -47,7 +45,7 @@ const ProductAdd = () => {
     attributes: [{}]
   }
 
-  const typesProduct:typeProd[] = ['Book', 'DVD-disc', 'Furniture'];
+  const typesProduct:typeProd[] = ['Book', 'DVD', 'Furniture'];
   const [selectedType, setSelectedType] = useState<typeProd>('' as typeProd);
 
   const handleChangeSelect =(e:React.ChangeEvent<HTMLSelectElement>, handleChange:handleChangeInt, setFieldValue:(field: string, value: any, shouldValidate?: boolean | undefined)=> void ) => {
@@ -101,6 +99,7 @@ const ProductAdd = () => {
               <ContInput>
                 <Label htmlFor="SKU">SKU</Label>
                 <input 
+                  id="sku"
                   type="text" 
                   name="SKU" 
                   onBlur={handleBlur}
@@ -112,6 +111,7 @@ const ProductAdd = () => {
               <ContInput>
                 <Label htmlFor="name">Name</Label>
                 <Field 
+                  id="name"
                   type="text" 
                   name="name"
                   onChange={handleChange}
@@ -122,6 +122,7 @@ const ProductAdd = () => {
               <ContInput>
                 <Label htmlFor="price">Price ($)</Label>
                 <Field 
+                  id="price"  
                   type="number" 
                   name="price"
                   onChange={handleChange}
@@ -156,7 +157,7 @@ const ProductAdd = () => {
                       ?
                       <BookInput handleChange={handleChange} values={values}  />
                       :
-                      selectedType==='DVD-disc'
+                      selectedType==='DVD'
                       ?
                       <DVDInput handleChange={handleChange} values={values} />
                       :

@@ -6,7 +6,7 @@ export interface IProduct {
   attributes: AttrProduct[];
 }
 
-export type typeProd = 'DVD-disc' | 'Book' | 'Furniture';
+export type typeProd = 'DVD' | 'Book' | 'Furniture';
 
 export interface AttrProduct {
   name: string;

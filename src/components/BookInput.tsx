@@ -14,6 +14,7 @@ const BookInput = ({values, handleChange}: PropsAtt) => {
       <ContInput>
         <Label>Weight (KG)</Label>
         <Field 
+          id="weight"
           type="number" 
           name={`attributes[0].weight`} 
           onChange={handleChange}

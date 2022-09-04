@@ -27,7 +27,7 @@ export const formSchema = Yup.object().shape({
       )
     })
     .when("type", {
-      is: "DVD-disc",
+      is: "DVD",
       then: Yup.array().of(
         Yup.object().shape({  
           size: Yup.number()

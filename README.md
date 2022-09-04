@@ -13,3 +13,4 @@
 - The page must have a “Cancel” button to cancel adding the product action. Once canceled, returned to the “Product List” page with no new products added.
 - No additional dialogues like “Are you sure you want to Save / Cancel?”
 - SKU should be unique for each product and it shouldn’t be possible to save products if already any product with the same SKU exists.
+
