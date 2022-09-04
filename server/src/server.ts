@@ -1,6 +1,5 @@
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import path from 'path';
 import helmet from 'helmet';
 import cors from 'cors';
 
@@ -10,8 +9,8 @@ import 'express-async-errors';
 
 import apiRouter from './routes/api';
 import logger from 'jet-logger';
-import { CustomError } from '@shared/errors';
-import connection, { dbConnection } from './bin/connection';
+import { CustomError } from './shared/errors';
+import { dbConnection } from './bin/connection';
 
 
 // Constants

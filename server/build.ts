@@ -3,17 +3,16 @@
  */
 
 import fs from 'fs-extra';
-import logger from 'jet-logger';
+
 import childProcess from 'child_process';
-
-
+import logger from 'jet-logger';
 
 (async () => {
     try {
         // Remove current build
         await remove('./dist/');
         // Copy production env file
-        await copy('./src/pre-start/env/production.env', './dist/pre-start/env/production.env');
+        await copy('./src/pre-start/env/production.env', './dist/src/pre-start/env/production.env');
         // Copy back-end files
         await exec('tsc --build tsconfig.prod.json', './')
     } catch (err) {

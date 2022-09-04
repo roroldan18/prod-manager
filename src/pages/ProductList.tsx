@@ -17,22 +17,30 @@ const ProductList = () => {
     handleGetProducts(isMounted);
     return ()=>{isMounted=false}
   }, [])
+  
 
-  
-  
-  
-  //VER PROBLEMA DE RENDERIZADO
+  const [deleted, setDeleted] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    handleGetProducts(isMounted);
+    
+    return ()=>{
+      isMounted=false
+      setDeleted(false)
+    }
+  }, [deleted]);
   
   const handleSubmitDelete =  async(values:any) => {
     const arrToDelete = []; 
     arrToDelete.push(...Object.keys(values).filter(key => values[key] === true ));
     
-    if(arrToDelete.length ===0){
+    if(arrToDelete.length === 0){
       alert('Nothing to delete')
     } else {
       try{
-        const res:any = await deleteMassProducts(arrToDelete);
-        res.message === 'deleted' && window.location.reload();
+        await deleteMassProducts(arrToDelete)
+        .then((res:any) => res.message === 'deleted' && setDeleted(true))
       } catch (error){
         alert('An error occur')
       } 

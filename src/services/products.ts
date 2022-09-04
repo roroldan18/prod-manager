@@ -2,7 +2,12 @@ import axios from 'axios';
 import { formFormik } from '../pages/ProductAdd';
 import { attributeJSON } from '../../server/src/routes/productsRouter';
 
-const url = 'http://localhost:3000/products'
+
+/* const host = process.env.SERVER_HOST as string;
+const port = process.env.SERVER_PORT as string;
+const productsEndP = process.env.SERVER_PRODUCTS_ENDPOINT as string;
+const url = `${host}:${port}${productsEndP}`; */
+const url = '/products'; //correction for netlify
 
 export const getProducts = async () =>{
   return await axios.get(url+'/');

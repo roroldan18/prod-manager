@@ -86,7 +86,7 @@ const ProductAdd = () => {
         handleSubmit,
         isSubmitting,
       }) => (
-        <FormSect onSubmit={handleSubmit}>
+        <FormSect onSubmit={handleSubmit} id="product_form">
             <Section>
               <NavSect>
                 <SubTitle>ProductAdd</SubTitle>

@@ -3,12 +3,12 @@ import * as Yup from 'yup';
 
 export const formSchema = Yup.object().shape({
   SKU: Yup.string()
-    .min(5, 'Too Short!')
-    .max(10, 'Too Long!')
+    .min(5, 'Too Short - Min 5 ')
+    .max(10, 'Too Long - Max 10')
     .required('Please, provide the data of indicated type'),
   name: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
+    .min(2, 'Too Short - Min 2')
+    .max(50, 'Too Long - Max 50')
     .required('Please, provide the data of indicated type'),
   price: Yup.number()
     .min(1, 'Please, provide the data of indicated type')
@@ -22,7 +22,7 @@ export const formSchema = Yup.object().shape({
         Yup.object().shape({  
           weight: Yup.number() 
           .required("Please, provide the data of indicated type")
-          .min(1, 'Insert a weight')
+          .min(1, 'Min weight 1')
         })
       )
     })
@@ -32,7 +32,7 @@ export const formSchema = Yup.object().shape({
         Yup.object().shape({  
           size: Yup.number()
             .required("Please, provide the data of indicated type")
-            .min(1, 'Insert a size')
+            .min(1, 'Insert a valid size')
           })
       )
     })
@@ -42,13 +42,13 @@ export const formSchema = Yup.object().shape({
         Yup.object().shape({  
           length: Yup.number() 
               .required("Please, provide the data of indicated type")
-              .min(15, 'Insert a length'),
+              .min(15, 'Insert a valid length - min 15cm'),
           width: Yup.number() 
                 .required("Please, provide the data of indicated type")
-                .min(15, 'Insert a width'),
+                .min(15, 'Insert a valid width - min 15cm'),
           height: Yup.number() 
                 .required("Please, provide the data of indicated type")
-                .min(15, 'Insert a height')
+                .min(15, 'Insert a valid height - min 15cm')
           })
       )
     })

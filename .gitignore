@@ -11,6 +11,9 @@
 # production
 /build
 
+#Back
+/server
+
 TODO.md
 
 # misc
@@ -23,5 +26,3 @@ TODO.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-/server

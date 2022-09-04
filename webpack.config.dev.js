@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require("webpack");
 
 module.exports = {
     entry: './src/index.tsx',
@@ -45,6 +46,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            "process.env.SERVER_HOST": JSON.stringify("localhost"),
+            "process.env.SERVER_PORT": JSON.stringify("8081"),
+            "process.env.SERVER_PRODUCTS_ENDPOINT": JSON.stringify("/products"),
+        }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: './index.html',

@@ -1,9 +1,9 @@
 import StatusCodes from 'http-status-codes';
 import { Request, Response, Router } from 'express';
-import db from 'src/bin/connection';
 import { QueryTypes } from 'sequelize';
-import { convertSQLToObject } from 'src/helpers/prodFormat';
+import db from '../bin/connection';
 import { ProdSQL } from 'src/interfaces/interfaces';
+import { convertSQLToObject } from '../helpers/prodFormat';
 
 // Constants
 const router = Router();
@@ -69,7 +69,7 @@ router.post(p.getAtt, async (req: Request, res: Response) => {
         })
       }
     })
-
+    
     return res.status(OK).json(objAtt);
     
   } catch (error) {
@@ -92,7 +92,6 @@ router.post(p.getTypes, async (req: Request, res: Response) => {
   try {
     const queryGetType = `Select * FROM type_product WHERE name="${type}";`
     const getType:any = await db.query(queryGetType, {type: QueryTypes.SELECT });
-
     return res.status(OK).json(getType[0].idtype_product);
     
   } catch (error) {
@@ -215,7 +214,6 @@ router.delete(p.delete, async (req: Request, res: Response) => {
       // 4. Commit transaction
       const commit = await db.query("COMMIT");
         
-      
       return res.status(OK).json({
         data: commit,
         message: 'Product deleted'}

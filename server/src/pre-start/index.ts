@@ -15,7 +15,7 @@ import commandLineArgs from 'command-line-args';
         {
             name: 'env',
             alias: 'e',
-            defaultValue: 'development',
+            defaultValue: 'production',
             type: String,
         },
     ]);
@@ -26,4 +26,7 @@ import commandLineArgs from 'command-line-args';
     if (result2.error) {
         throw result2.error;
     }
+    
 })();
+
+
