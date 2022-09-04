@@ -5,12 +5,16 @@
 /.pnp
 .pnp.js
 
+.webpack.config.prod.js
+
 # testing
 /coverage
 
 # production
-/build
 /dist
+/build
+
+
 
 #Back
 /server
